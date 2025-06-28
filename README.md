@@ -35,4 +35,26 @@ Demo de un proyecto para la Gestión de inventario
 
    ```
 
-4. Accede a la aplicación en: http://localhost:8080
+4. Instalar dependencias PHP
+
+   ```bash
+   docker compose exec app composer install
+
+   ```
+
+5. Correr migraciones
+
+   ```bash
+   docker compose exec app php yii migrate
+
+   ```
+
+6. Ejecutar las pruebas unitarias
+
+   ```bash
+   docker compose exec app vendor/bin/codecept run unit
+   docker compose exec app vendor/bin/codecept run functional
+
+   ```
+
+7. Accede a la aplicación en: http://localhost:8080
