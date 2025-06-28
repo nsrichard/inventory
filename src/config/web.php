@@ -44,9 +44,10 @@ $config = [
         'db' => $db,
         'urlManager' => [
             'enablePrettyUrl' => true,
-            'enableStrictParsing' => true,
+            'enableStrictParsing' => false,
             'showScriptName' => false,
             'rules' => [
+                //'/' => 'site/index',
                 ['class' => 'yii\rest\UrlRule', 'controller' => ['product', 'category']],
             ],
         ],
@@ -61,6 +62,7 @@ $config = [
 
     ],
     'params' => $params,
+    'defaultRoute' => 'site/index',
 ];
 
 if (YII_ENV_DEV) {

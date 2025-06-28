@@ -55,7 +55,7 @@ class CategoryController extends Controller
     public function actionCreate()
     {
         $category = new Category();
-        $data = Yii::$app->request->post();
+        $data = json_decode(Yii::$app->request->getRawBody(), true);
 
         if ($category->load($data, '') && $category->save()) {
             return ['status' => 'created', 'data' => $category];
@@ -72,7 +72,7 @@ class CategoryController extends Controller
             throw new NotFoundHttpException("Category not found.");
         }
 
-        $data = Yii::$app->request->post();
+        $data = json_decode(Yii::$app->request->getRawBody(), true);
 
         if ($category->load($data, '') && $category->save()) {
             return ['status' => 'updated', 'data' => $category];

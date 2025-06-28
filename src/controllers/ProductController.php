@@ -90,7 +90,8 @@ class ProductController extends Controller
     public function actionCreate()
     {
         $product = new Product();
-        $data = Yii::$app->request->post();
+        
+        $data = json_decode(Yii::$app->request->getRawBody(), true);
 
         if ($product->load($data, '') && $product->save()) {
             return ['status' => 'created', 'data' => $product];
@@ -107,7 +108,7 @@ class ProductController extends Controller
             throw new NotFoundHttpException("Product not found.");
         }
 
-        $data = Yii::$app->request->post();
+        $data = json_decode(Yii::$app->request->getRawBody(), true);
 
         if ($product->load($data, '') && $product->save()) {
             return ['status' => 'updated', 'data' => $product];

@@ -20,7 +20,6 @@ use Yii;
 class Product extends \yii\db\ActiveRecord
 {
 
-
     /**
      * {@inheritdoc}
      */
@@ -69,6 +68,16 @@ class Product extends \yii\db\ActiveRecord
     public function getCategory()
     {
         return $this->hasOne(Category::class, ['id' => 'category_id']);
+    }
+
+    public function extraFields()
+    {
+        return ['category'];
+    }
+
+    public function fields()
+    {
+        return array_merge(parent::fields(), ['category']);
     }
 
 }
