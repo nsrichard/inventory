@@ -29,23 +29,21 @@ class Product extends \yii\db\ActiveRecord
         return 'product';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function rules()
     {
         return [
-            [['description', 'category_id'], 'default', 'value' => null],
-            [['stock'], 'default', 'value' => 0],
-            [['name', 'price'], 'required'],
-            [['description'], 'string'],
-            [['price'], 'number'],
-            [['stock', 'category_id'], 'integer'],
-            [['created_at'], 'safe'],
-            [['name'], 'string', 'max' => 255],
-            [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::class, 'targetAttribute' => ['category_id' => 'id']],
+            [['name', 'price'], 'required', 'message' => 'El campo {attribute} es obligatorio.'],
+            ['name', 'string', 'max' => 255, 'tooLong' => 'El nombre no puede superar los 255 caracteres.'],
+            ['price', 'number', 'min' => 0, 'tooSmall' => 'El precio debe ser igual o mayor a 0.'],
+            ['stock', 'integer', 'min' => 0, 'tooSmall' => 'El stock no puede ser negativo.'],
+            ['category_id', 'exist',
+                'targetClass' => Category::class,
+                'targetAttribute' => ['category_id' => 'id'],
+                'message' => 'La categoría seleccionada no es válida.'
+            ],
         ];
     }
+
 
     /**
      * {@inheritdoc}

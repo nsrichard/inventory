@@ -25,15 +25,11 @@ class Category extends \yii\db\ActiveRecord
         return 'category';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function rules()
     {
         return [
             [['name'], 'required'],
-            [['created_at'], 'safe'],
-            [['name'], 'string', 'max' => 255],
+            ['name', 'string', 'max' => 100],
         ];
     }
 

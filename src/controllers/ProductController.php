@@ -9,6 +9,7 @@ use yii\filters\ContentNegotiator;
 use yii\web\NotFoundHttpException;
 use yii\web\BadRequestHttpException;
 use app\models\Product;
+use app\models\ProductSearch;
 
 class ProductController extends Controller
 {
@@ -27,15 +28,16 @@ class ProductController extends Controller
 
     public function actionIndex()
     {
-        $products = Product::find()
-            ->with('category')
-            ->asArray()
-            ->all();
+        $searchModel = new ProductSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return [
             'status' => 'success',
-            'count' => count($products),
-            'data' => $products,
+            'data' => $dataProvider->getModels(),
+            'pagination' => [
+                'total' => $dataProvider->getTotalCount(),
+                'page' => $dataProvider->pagination->getPage() + 1,
+            ]
         ];
     }
 
