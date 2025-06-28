@@ -1,0 +1,9 @@
+/vendor/
+/src/vendor/
+/src/runtime/
+/src/web/assets/
+/.env
+.env.*
+.idea/
+.DS_Store
+*.log
