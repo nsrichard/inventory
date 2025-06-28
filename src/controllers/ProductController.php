@@ -26,6 +26,16 @@ class ProductController extends Controller
         ];
     }
 
+    /**
+     * @OA\Get(
+     *     path="/products",
+     *     summary="Lista de productos",
+     *     @OA\Response(
+     *         response=200,
+     *         description="Listado exitoso"
+     *     )
+     * )
+     */
     public function actionIndex()
     {
         $searchModel = new ProductSearch();
@@ -55,6 +65,27 @@ class ProductController extends Controller
 
         return ['status' => 'success', 'data' => $product];
     }
+
+    /**
+     * @OA\Post(
+     *     path="/products",
+     *     summary="Crear producto",
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             required={"name","price"},
+     *             @OA\Property(property="name", type="string", example="Tablet M10"),
+     *             @OA\Property(property="price", type="number", example=299.99),
+     *             @OA\Property(property="stock", type="integer", example=50),
+     *             @OA\Property(property="category_id", type="integer", example=1)
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Producto creado"
+     *     )
+     * )
+     */
 
     public function actionCreate()
     {
